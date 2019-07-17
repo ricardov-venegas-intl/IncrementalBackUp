@@ -8,7 +8,7 @@ namespace IncrementalBackup
     /// <summary>
     /// Repository of files to backup
     /// </summary>
-    interface IFileSourceRepository
+    interface ILocalFileSystemRepository
     {
         /// <summary>
         /// Get the files in the location

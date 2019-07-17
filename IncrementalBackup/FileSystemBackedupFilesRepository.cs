@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace IncrementalBackup
 {
-    class BackedupFilesRepository : IBackupRepository
+    class FileSystemBackedupFilesRepository : IBackupRepository
     {
         DirectoryInfo _directoryInfo;
 
@@ -13,7 +13,7 @@ namespace IncrementalBackup
         /// Constructor
         /// </summary>
         /// <param name="directoryInfo"></param>
-        public BackedupFilesRepository(DirectoryInfo directoryInfo)
+        public FileSystemBackedupFilesRepository(DirectoryInfo directoryInfo)
         {
             _directoryInfo = directoryInfo;
         }

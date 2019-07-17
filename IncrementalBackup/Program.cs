@@ -31,17 +31,18 @@ namespace IncrementalBackup
             if (commandLineOptions.Action == Commands.Backup)
             {
                 var sourceDirectories = backupDefinition.SourceDirectories.Select(sd => new DirectoryInfo(sd)).ToArray();
-                IFileSourceRepository sourceRepository = new SourceFilesRepository(sourceDirectories, new FSHA256Hasher());
-                IBackupRepository destinationRepository = new BackedupFilesRepository(new DirectoryInfo(backupDefinition.Destination));
-                IBackupManager backupManager = new BackupManager(sourceRepository, destinationRepository, commandLineOptions.Host);
+                ILocalFileSystemRepository sourceRepository = new LocalFileSystemRepository(sourceDirectories, new FSHA256Hasher());
+                //IBackupRepository destinationRepository = new FileSystemBackedupFilesRepository(new DirectoryInfo(backupDefinition.Destination));
+                IBackupRepository backupRepository = new ServiceBackedupFilesRepository(new BackupServiceClient(backupDefinition.Destination));
+                IBackupManager backupManager = new BackupManager(sourceRepository, backupRepository, commandLineOptions.Host);
                 backupManager.BackupFiles();
             }
             else if (commandLineOptions.Action == Commands.Restore)
             {
                 var sourceDirectories = backupDefinition.SourceDirectories.Select(sd => new DirectoryInfo(sd)).ToArray();
-                IFileSourceRepository sourceRepository = new SourceFilesRepository(sourceDirectories, new FSHA256Hasher());
-                IBackupRepository destinationRepository = new BackedupFilesRepository(new DirectoryInfo(backupDefinition.Destination));
-                IBackupManager backupManager = new BackupManager(sourceRepository, destinationRepository, commandLineOptions.Host);
+                ILocalFileSystemRepository sourceRepository = new LocalFileSystemRepository(sourceDirectories, new FSHA256Hasher());
+                IBackupRepository backupRepository = new ServiceBackedupFilesRepository(new BackupServiceClient(backupDefinition.Destination));
+                IBackupManager backupManager = new BackupManager(sourceRepository, backupRepository, commandLineOptions.Host);
                 backupManager.RestoreFiles(commandLineOptions.DestinationDirectory);
             }
         }

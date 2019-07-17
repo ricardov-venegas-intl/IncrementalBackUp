@@ -12,7 +12,7 @@ namespace IncrementalBackup
     /// </summary>
     class BackupManager : IBackupManager
     {
-        IFileSourceRepository _sourceFilesRepository;
+        ILocalFileSystemRepository _sourceFilesRepository;
         IBackupRepository _backedupFilesRepository;
         string _hostName;
 
@@ -22,7 +22,7 @@ namespace IncrementalBackup
         /// <param name="sourceRepository"></param>
         /// <param name="destinationRepository"></param>
         /// <param name="hostName"></param>
-        public BackupManager(IFileSourceRepository sourceRepository, IBackupRepository destinationRepository, string hostName)
+        public BackupManager(ILocalFileSystemRepository sourceRepository, IBackupRepository destinationRepository, string hostName)
         {
             _sourceFilesRepository = sourceRepository;
             _backedupFilesRepository = destinationRepository;

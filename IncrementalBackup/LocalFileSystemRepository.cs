@@ -10,7 +10,7 @@ namespace IncrementalBackup
     /// <summary>
     /// Source Files Repository
     /// </summary>
-    class SourceFilesRepository : IFileSourceRepository
+    class LocalFileSystemRepository : ILocalFileSystemRepository
     {
         DirectoryInfo[] _directoriesInfo;
         IFileHasher _fileHasher;
@@ -20,7 +20,7 @@ namespace IncrementalBackup
         /// </summary>
         /// <param name="directoriesInfo"></param>
         /// <param name="fileHasher"></param>
-        public SourceFilesRepository (DirectoryInfo[] directoriesInfo, IFileHasher fileHasher)
+        public LocalFileSystemRepository (DirectoryInfo[] directoriesInfo, IFileHasher fileHasher)
         {
             _directoriesInfo = directoriesInfo;
             _fileHasher = fileHasher;
